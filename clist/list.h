@@ -29,6 +29,9 @@ struct list { \
 }; \
 \
 void initialize_list(struct list* instance) { \
+	if(instance != NULL) \
+		return; \
+	\
 	instance->head = NULL; \
 	instance->tail = NULL; \
 } \
@@ -49,6 +52,9 @@ struct node* allocate_node(int key, T data, struct node* prev, \
 }\
 \
 int insert(struct list* instance, int key, T data) { \
+	if(instance == NULL) \
+		return 1; \
+	\
 	if(instance->head == NULL) { \
 		instance->head  \
 			= allocate_node(key, data, NULL, NULL); \
@@ -107,6 +113,9 @@ int insert(struct list* instance, int key, T data) { \
 } \
 \
 struct node* find(struct list* instance, int key) { \
+	if(instance == NULL) \
+		return NULL; \
+	\
 	struct node* temp = instance->head; \
 	\
 	if(instance->tail->key == key) \
@@ -123,6 +132,9 @@ struct node* find(struct list* instance, int key) { \
 } \
 \
 int remove_node(struct list* instance, int key) { \
+	if(instance == NULL) \
+		return 1; \
+	\
 	struct node* temp = NULL; \
 	\
 	if((temp = find(instance, key)) != NULL) { \
@@ -149,6 +161,9 @@ int remove_node(struct list* instance, int key) { \
 } \
 \
 int remove_list(struct list* instance) { \
+	if(instance == NULL) \
+		return 1; \
+	\
 	struct node* temp = instance->head; \
 	\
 	temp = temp->next; \
